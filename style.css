@@ -1,0 +1,55 @@
+@charset "utf-8";
+
+body{
+    background-image: url("kepek/hatter.png");
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+#tabla img{
+
+    max-width: 70px;
+}
+#tabla{
+    background-color: white;
+    max-width: 1300px;
+}
+#kuldetesek img{
+    max-width: 450px;
+}
+main{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    margin-left: 30px;
+}
+main p{
+    font-weight: bold;
+}
+#evszakok{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;  
+}
+#lehelyezendo img{
+    max-width: 70px;
+}
+#evszakok div{  
+    text-align: center;
+    width: 80%;
+}
+#tavasz{
+    background-color: lightgreen; 
+    border: 3px solid green;
+}
+#nyar{
+    background-color: rgb(224, 211, 26); 
+    border: 3px solid goldenrod;
+}
+#osz{
+    background-color: peachpuff; 
+    border: 3px solid brown;
+}
+#tel{
+    background-color: lightblue; 
+    border: 3px solid darkblue;
+}
