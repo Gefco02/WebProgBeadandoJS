@@ -1,126 +1,3 @@
-
-    
-tablazatKiiras();
-
-let eddigiPontok=0;
-let kuldiSzamok=[];
-let egyes=0;
-let kettes=0;
-let harmas=0;
-let negyes=0;
-let otos=0;
-let arr = [];
-let arr2 = [];
-  function tablazatKiiras() {
-    const tablazat = document.querySelector("#tabla");
-    const hegyek = ["2,2", "4,9", "6,4", "9,10", "10,6"];
-    for (let i = 1; i <= 11; i++) {
-      const tr = document.createElement("tr");
-      for (let j = 1; j <= 11; j++) {
-        const td = document.createElement("td");
-        const img = document.createElement("img");
-        img.id = i + "," + j;
-        if (hegyek.includes(img.id)) {
-          img.src = "kepek/elemek/alap_hegy.png";
-          img.alt = "alap_hegy";
-        } else {
-          img.src = "kepek/elemek/alap.png";
-          img.alt = "alap";
-        }
-        img.addEventListener("mouseover", negyzetRe);
-        img.addEventListener("mouseout", negyzetRol);
-        img.addEventListener("click", lerak);
-        td.appendChild(img);
-        tr.appendChild(td);
-      }
-      tablazat.appendChild(tr);
-    }
-  }
-
-
-
-const missions = 
-{
-  "basic": [
-    {
-      "title": "Az erdő széle",
-      "description": "A térképed szélével szomszédos erdőmezőidért egy-egy pontot kapsz."
-    },
-    {
-      "title": "Álmos-völgy",
-      "description": "Minden olyan sorért, amelyben három erdőmező van, négy-négy pontot kapsz."
-    },
-    {
-      "title": "Krumpliöntözés",
-      "description": "A farmmezőiddel szomszédos vízmezőidért két-két pontot kapsz."
-    },
-    {
-      "title": "Határvidék",
-      "description": "Minden teli sorért vagy oszlopért 6-6 pontot kapsz."
-    },
-
-    {
-      "title": "Fasor",
-      "description": "A leghosszabb, függőlegesen megszakítás nélkül egybefüggő erdőmezők mindegyikéért kettő-kettő pontot kapsz. Két azonos hosszúságú esetén csak az egyikért."
-    },
-    {
-      "title": "Gazdag város",
-      "description": "A legalább három különböző tereptípussal szomszédos falurégióidért három-három pontot kapsz."
-    },
-    {
-      "title": "Öntözőcsatorna",
-      "description": "Minden olyan oszlopodért, amelyben a farm illetve a vízmezők száma megegyezik, négy-négy pontot kapsz. Mindkét tereptípusból legalább egy-egy mezőnek lennie kell az oszlopban ahhoz, hogy pontot kaphass érte."
-    },
-    {
-      "title": "Mágusok völgye",
-      "description": "A hegymezőiddel szomszédos vízmezőidért három-három pontot kapsz."
-    },
-    {
-      "title": "Üres telek",
-      "description": "A városmezőiddel szomszédos üres mezőkért 2-2 pontot kapsz."
-    },
-    {
-      "title": "Sorház",
-      "description": "A leghosszabb, vízszintesen megszakítás nélkül egybefüggő falumezők mindegyikéért kettő-kettő pontot kapsz."
-    },
-    {
-      "title": "Páratlan silók",
-      "description": "Minden páratlan sorszámú teli oszlopodért 10-10 pontot kapsz."
-    },
-    {
-      "title": "Gazdag vidék",
-      "description": "Minden legalább öt különböző tereptípust tartalmazó sorért négy-négy pontot kapsz."
-    }],
-  
-}
-shuffle2();
-kuldetesKiiras();
-tablazatAlt();
-function kuldetesKiiras(){
-    const tablazat = document.querySelector("#kuldetesek");
-    let seged=0;
-    for (let i = 1; i <= 2; i++) {
-      const tr = document.createElement("tr");
-      for (let j = 1; j <= 2; j++) {
-        const td = document.createElement("td");
-        const img = document.createElement("img");
-          img.id= kuldiSzamok[seged];
-          img.src = "kepek/kuldetesek/kuldetes"+kuldiSzamok[seged]+".png";
-          img.alt = "kuldetes"+kuldiSzamok[seged];
-        td.appendChild(img);
-        tr.appendChild(td);
-        seged++;
-      }
-      tablazat.appendChild(tr);
-    }
-    document.getElementById(kuldiSzamok[0]+"").style.border = '4px solid #ff0000';
-    document.getElementById(kuldiSzamok[1]+"").style.border = '4px solid #ff0000';
-
-}
-
-
-
-
 const elements = [
     {
         time: 2,
@@ -267,9 +144,141 @@ const elements = [
         mirrored: false  
     },
 ]
-
+let rossz=false;
+let eddigiPontok=0;
+let kuldiSzamok=[];
+let egyes=0;
+let kettes=0;
+let harmas=0;
+let negyes=0;
+let otos=0;
+let arr = [];
+let arr2 = [];
+let ido=0;
+let evszakIdo=0;
+let pontok=0;
+let kuldetesekAlt = [];
 let element;
+let elements2 = [];
+tablazatKiiras();
+shuffle2();
+kuldetesKiiras();
+tablazatAlt();
 shuffle();
+aktualisElem();
+lehelyezendoKiiras();
+
+  function tablazatKiiras() {
+    const tablazat = document.querySelector("#tabla");
+    const hegyek = ["2,2", "4,9", "6,4", "9,10", "10,6"];
+    for (let i = 1; i <= 11; i++) {
+      const tr = document.createElement("tr");
+      for (let j = 1; j <= 11; j++) {
+        const td = document.createElement("td");
+        const img = document.createElement("img");
+        img.id = i + "," + j;
+        if (hegyek.includes(img.id)) {
+          img.src = "kepek/elemek/alap_hegy.png";
+          img.alt = "alap_hegy";
+        } else {
+          img.src = "kepek/elemek/alap.png";
+          img.alt = "alap";
+        }
+        img.addEventListener("mouseover", negyzetRe);
+        img.addEventListener("mouseout", negyzetRol);
+        img.addEventListener("click", lerak);
+        td.appendChild(img);
+        tr.appendChild(td);
+      }
+      tablazat.appendChild(tr);
+    }
+  }
+
+
+
+const missions = 
+{
+  "basic": [
+    {
+      "title": "Az erdő széle",
+      "description": "A térképed szélével szomszédos erdőmezőidért egy-egy pontot kapsz."
+    },
+    {
+      "title": "Álmos-völgy",
+      "description": "Minden olyan sorért, amelyben három erdőmező van, négy-négy pontot kapsz."
+    },
+    {
+      "title": "Krumpliöntözés",
+      "description": "A farmmezőiddel szomszédos vízmezőidért két-két pontot kapsz."
+    },
+    {
+      "title": "Határvidék",
+      "description": "Minden teli sorért vagy oszlopért 6-6 pontot kapsz."
+    },
+
+    {
+      "title": "Fasor",
+      "description": "A leghosszabb, függőlegesen megszakítás nélkül egybefüggő erdőmezők mindegyikéért kettő-kettő pontot kapsz. Két azonos hosszúságú esetén csak az egyikért."
+    },
+    {
+      "title": "Gazdag város",
+      "description": "A legalább három különböző tereptípussal szomszédos falurégióidért három-három pontot kapsz."
+    },
+    {
+      "title": "Öntözőcsatorna",
+      "description": "Minden olyan oszlopodért, amelyben a farm illetve a vízmezők száma megegyezik, négy-négy pontot kapsz. Mindkét tereptípusból legalább egy-egy mezőnek lennie kell az oszlopban ahhoz, hogy pontot kaphass érte."
+    },
+    {
+      "title": "Mágusok völgye",
+      "description": "A hegymezőiddel szomszédos vízmezőidért három-három pontot kapsz."
+    },
+    {
+      "title": "Üres telek",
+      "description": "A városmezőiddel szomszédos üres mezőkért 2-2 pontot kapsz."
+    },
+    {
+      "title": "Sorház",
+      "description": "A leghosszabb, vízszintesen megszakítás nélkül egybefüggő falumezők mindegyikéért kettő-kettő pontot kapsz."
+    },
+    {
+      "title": "Páratlan silók",
+      "description": "Minden páratlan sorszámú teli oszlopodért 10-10 pontot kapsz."
+    },
+    {
+      "title": "Gazdag vidék",
+      "description": "Minden legalább öt különböző tereptípust tartalmazó sorért négy-négy pontot kapsz."
+    }],
+  
+}
+
+function kuldetesKiiras(){
+    const tablazat = document.querySelector("#kuldetesek");
+    let seged=0;
+    for (let i = 1; i <= 2; i++) {
+      const tr = document.createElement("tr");
+      for (let j = 1; j <= 2; j++) {
+        const td = document.createElement("td");
+        const img = document.createElement("img");
+          img.id= kuldiSzamok[seged];
+          img.src = "kepek/kuldetesek/kuldetes"+kuldiSzamok[seged]+".png";
+          img.alt = "kuldetes"+kuldiSzamok[seged];
+        td.appendChild(img);
+        tr.appendChild(td);
+        seged++;
+      }
+      tablazat.appendChild(tr);
+    }
+    document.getElementById(kuldiSzamok[0]+"").style.border = '4px solid #ff0000';
+    document.getElementById(kuldiSzamok[1]+"").style.border = '4px solid #ff0000';
+
+}
+
+
+
+
+
+
+
 function shuffle() {
   let currentIndex = elements.length,  randomIndex;
 
@@ -298,7 +307,6 @@ function shuffle2() {
 }
 
 
-let elements2 = [];
 function aktualisElem(){
   //let rand = Math.floor(Math.random() * elements.length);
   //element=elements[rand];
@@ -331,12 +339,11 @@ function lehelyezendoKiiras(){
     }
     tablazat.appendChild(tr);
   }
-  document.getElementById("lehelyezendo2").setHTML("Lehelyezendő elem: "+element.time+" időegységbe kerül");
+  document.getElementById("lehelyezendo2").innerHTML=("Lehelyezendő elem: "+element.time+" időegységbe kerül");
   
 
 }
-aktualisElem();
-lehelyezendoKiiras();
+
 
 forgat.addEventListener("click", () => {
   let N = 3;
@@ -354,7 +361,7 @@ forgat.addEventListener("click", () => {
 });
 
 tavasz.addEventListener("click", () => {
-  document.getElementById("kuldik").setHTML("");
+  document.getElementById("kuldik").innerHTML=("");
 console.log("asd");
 const tablazat = document.querySelector("#kuldik");
     for (let i = 1; i <= 5; i++) {
@@ -364,18 +371,18 @@ const tablazat = document.querySelector("#kuldik");
         const p = document.createElement("p");
         p.id = (i+20)+"-"+j;
         if(j%2==0 && i==1){
-          p.setHTML(egyes);
+          p.innerHTML=(egyes);
         }else if(j%2==0 && i==2){
-          p.setHTML(kettes);
+          p.innerHTML=(kettes);
         }else if(j%2==0 && i==3){
-          p.setHTML(harmas);
+          p.innerHTML=(harmas);
         }else if(j%2==0 && i==4){
-          p.setHTML(negyes);
+          p.innerHTML=(negyes);
         }else if(j%2==0 && i==5){
-          p.setHTML(kuldetes4());
+          p.innerHTML=(kuldetes4());
         }
         else{
-          p.setHTML(i+". Küldetés pontjai:")
+          p.innerHTML=(i+". Küldetés pontjai:")
         }
         td.appendChild(p);
         tr.appendChild(td);
@@ -393,7 +400,7 @@ tukroz.addEventListener("click", () => {
   lehelyezendoKiiras(element);
 });
 
-let rossz=false;
+
 
 function negyzetRe(e){
   rossz=false;
@@ -477,8 +484,6 @@ function negyzetRol(e){
 }
 
 }
-let ido=0;
-let evszakIdo=0;
 
 function lerak(e){
   if(!rossz){
@@ -501,7 +506,8 @@ function lerak(e){
       }
     }
       
-    tablazatAlt();
+	tablazatAlt();
+
     if(ido==7 || (ido==8 && element.time!=1)){
       egyes=eval(kuldetesekAlt[0])();
       pontok+=egyes;
@@ -509,9 +515,9 @@ function lerak(e){
       pontok+=kettes;
       pontok+=hegybekerites();
       jelenEvszak
-      document.getElementById("jelenEvszak").setHTML("Jelenlegi évszak: Nyár");
-      document.getElementById("tavaszP").setHTML(pontok+" pont");
-      document.getElementById("osszPont").setHTML("Összesen: "+pontok+" pont");
+      document.getElementById("jelenEvszak").innerHTML=("Jelenlegi évszak: Nyár");
+      document.getElementById("tavaszP").innerHTML=(pontok+" pont");
+      document.getElementById("osszPont").innerHTML=("Összesen: "+pontok+" pont");
       document.getElementById(kuldiSzamok[0]+"").style.border = '';
       document.getElementById(kuldiSzamok[2]+"").style.border = '4px solid #ff0000';
 
@@ -523,9 +529,9 @@ function lerak(e){
       pontok+=eval(kuldetesekAlt[1])();
       pontok+=eval(kuldetesekAlt[2])();
       pontok+=hegybekerites();
-      document.getElementById("jelenEvszak").setHTML("Jelenlegi évszak: Ősz");
-      document.getElementById("nyarP").setHTML(Math.abs(pontok-eddigiPontok)+" pont");
-      document.getElementById("osszPont").setHTML("Összesen: "+pontok+" pont");
+      document.getElementById("jelenEvszak").innerHTML=("Jelenlegi évszak: Ősz");
+      document.getElementById("nyarP").innerHTML=(Math.abs(pontok-eddigiPontok)+" pont");
+      document.getElementById("osszPont").innerHTML=("Összesen: "+pontok+" pont");
       document.getElementById(kuldiSzamok[1]+"").style.border = '';
       document.getElementById(kuldiSzamok[3]+"").style.border = '4px solid #ff0000';
 
@@ -536,9 +542,9 @@ function lerak(e){
       pontok+=eval(kuldetesekAlt[2])();
       pontok+=eval(kuldetesekAlt[3])();
       pontok+=hegybekerites();
-      document.getElementById("jelenEvszak").setHTML("Jelenlegi évszak: Tél");
-      document.getElementById("oszP").setHTML(Math.abs(pontok-eddigiPontok)+" pont");
-      document.getElementById("osszPont").setHTML("Összesen: "+pontok+" pont");
+      document.getElementById("jelenEvszak").innerHTML=("Jelenlegi évszak: Tél");
+      document.getElementById("oszP").innerHTML=(Math.abs(pontok-eddigiPontok)+" pont");
+      document.getElementById("osszPont").innerHTML=("Összesen: "+pontok+" pont");
       document.getElementById(kuldiSzamok[2]+"").style.border = '';
       document.getElementById(kuldiSzamok[0]+"").style.border = '4px solid #ff0000';
 
@@ -549,8 +555,8 @@ function lerak(e){
       egyes+=eval(kuldetesekAlt[0])();
       negyes+=eval(kuldetesekAlt[3])();
       pontok+=hegybekerites();
-      document.getElementById("telP").setHTML(Math.abs(pontok-eddigiPontok)+" pont");
-      document.getElementById("osszPont").setHTML("Összesen: "+pontok+" pont");
+      document.getElementById("telP").innerHTML=(Math.abs(pontok-eddigiPontok)+" pont");
+      document.getElementById("osszPont").innerHTML=("Összesen: "+pontok+" pont");
       document.getElementById(kuldiSzamok[3]+"").style.border = '';
       document.getElementById(kuldiSzamok[0]+"").style.border = '';
       alert("Játék vége, pontszámod: "+pontok);
@@ -565,7 +571,7 @@ function lerak(e){
   }else if(evszakIdo>7){
     evszakIdo=1;
   }
-    document.getElementById("idoKeret").setHTML(7-evszakIdo+"/7");
+    document.getElementById("idoKeret").innerHTML=(7-evszakIdo+"/7");
   rossz=true;
     aktualisElem();
       lehelyezendoKiiras();
@@ -573,9 +579,6 @@ function lerak(e){
   }
 }
 
-let pontok=0;
-
-let kuldetesekAlt = [];
 
 function kuldetesAlt(){
   for (let i = 0; i < 4; i++) {
@@ -697,7 +700,7 @@ function kuldetes5(){
   return (legnagyobb*2);
 }
 function kuldetes6(){
-  
+  console.log("Gazdag város");
   let eredmeny=0;
   let tomb=[];
   for (let i = 0; i < 11; i++) {
