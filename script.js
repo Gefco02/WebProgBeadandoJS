@@ -168,6 +168,19 @@ shuffle();
 aktualisElem();
 lehelyezendoKiiras();
 
+function jatekVege(){
+	for (let i = 1; i <= 11; i++) {
+		for (let j = 1; j <= 11; j++) {
+			document.getElementById(i + "," + j).removeEventListener("click", lerak);
+						document.getElementById(i + "," + j).removeEventListener("mouseover", negyzetRe);
+
+			document.getElementById(i + "," + j).removeEventListener("mouseout", negyzetRol);
+
+		}
+	}
+	
+}
+
   function tablazatKiiras() {
     const tablazat = document.querySelector("#tabla");
     const hegyek = ["2,2", "4,9", "6,4", "9,10", "10,6"];
@@ -560,6 +573,7 @@ function lerak(e){
       document.getElementById(kuldiSzamok[3]+"").style.border = '';
       document.getElementById(kuldiSzamok[0]+"").style.border = '';
       alert("Játék vége, pontszámod: "+pontok);
+	  jatekVege();
       
 
     }
